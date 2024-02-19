@@ -26,6 +26,13 @@ git clone https://github.com/your-username/erc20-token.git
 npm install
 ```
 
+3. Add .env file:
+```
+PRIVATE_KEY = <metamask-private-key>
+ETHERSCAN_API_KEY = <etherscan-api-key>
+INFURA_SEPOLIA_ENDPOINT = https://sepolia.infura.io/v3/<api-key>
+```
+
 3. Compile the contract:
 ```
 npx hardhat compile
@@ -39,11 +46,6 @@ npx hardhat run scripts/deploy.js --network NETWORK_NAME
 Replace `NETWORK_NAME` with the desired network (e.g., `rinkeby`, `ropsten`, `mainnet`).
 In out case it is **Sepolia**
 
-## Configuration
-
-- Solidity version: 0.8.24
-- Hardhat version: 2.0.10
-- Dependencies: @nomiclabs/hardhat-ethers, dotenv, ethers
 
 ## Contributing
 
