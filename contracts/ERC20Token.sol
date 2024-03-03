@@ -1,5 +1,5 @@
-// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.24;
+
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Capped.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
@@ -17,12 +17,10 @@ contract MyERC20Token is ERC20Capped, ERC20Burnable {
         blockReward = reward * (10 ** decimals()); // Setting block reward for first deploy
     }
 
-    // Setting miner reward
     function _mintMinerReward() internal {
         _mint(block.coinbase, blockReward);
     }
 
-    // block.conbase validation for rewarding the minder; prevents miner from manipulating teh token
     function _beforeTokenTransfer(
         address from,
         address to,
@@ -49,19 +47,19 @@ contract MyERC20Token is ERC20Capped, ERC20Burnable {
         super._mint(account, amount);
     }
 
-      //Destroying the contract
     function destroyContract() public onlyOwner {
+        emit Destroyed();
         selfdestruct(owner);
     }
 
-    // Set block rewards
     function setBlockReward(uint256 reward) public onlyOwner {
         blockReward = reward * (10 ** decimals());
     }
 
-    //reusable modifier
     modifier onlyOwner() {
         require(msg.sender == owner, "Only the owner can call this function");
         _;
     }
+
+    event Destroyed();
 }
